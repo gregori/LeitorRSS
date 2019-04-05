@@ -4,6 +4,8 @@ import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
@@ -15,11 +17,13 @@ import java.net.URL;
 
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = "MainActivity";
+    private ListView rssListView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        rssListView = findViewById(R.id.rssListView);
 
         Log.d(TAG, "onCreate: começando AsyncTask");
         DownloadDeDados downloadDeDados = new DownloadDeDados();
@@ -45,6 +49,10 @@ public class MainActivity extends AppCompatActivity {
             Log.d(TAG, "onPostExecute: parâmetro é: " + s);
             ParseRSS parseRSS = new ParseRSS();
             parseRSS.parse(s);
+            ArrayAdapter<RSSEntry> arrayAdapter = new ArrayAdapter<>(
+                MainActivity.this, R.layout.list_item, parseRSS.getAplicacoes()
+            );
+            rssListView.setAdapter(arrayAdapter);
         }
 
         private String downloadRSS(String urlString) {

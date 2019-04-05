@@ -27,8 +27,7 @@ public class ParseRSS {
         boolean inEntry = false;
         String valorTexto = "";
 
-        XmlPullParserFactory factory =
-                null;
+        XmlPullParserFactory factory = null;
         try {
             factory = XmlPullParserFactory.newInstance();
             factory.setNamespaceAware(true);
