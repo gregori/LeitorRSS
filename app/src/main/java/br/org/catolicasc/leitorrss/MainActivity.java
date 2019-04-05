@@ -43,6 +43,8 @@ public class MainActivity extends AppCompatActivity {
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
             Log.d(TAG, "onPostExecute: parâmetro é: " + s);
+            ParseRSS parseRSS = new ParseRSS();
+            parseRSS.parse(s);
         }
 
         private String downloadRSS(String urlString) {
