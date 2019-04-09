@@ -49,10 +49,13 @@ public class MainActivity extends AppCompatActivity {
             Log.d(TAG, "onPostExecute: parâmetro é: " + s);
             ParseRSS parseRSS = new ParseRSS();
             parseRSS.parse(s);
-            ArrayAdapter<RSSEntry> arrayAdapter = new ArrayAdapter<>(
-                MainActivity.this, R.layout.list_item, parseRSS.getAplicacoes()
-            );
-            rssListView.setAdapter(arrayAdapter);
+//            ArrayAdapter<RSSEntry> arrayAdapter = new ArrayAdapter<>(
+//                MainActivity.this, R.layout.list_item, parseRSS.getAplicacoes()
+//            );
+//            rssListView.setAdapter(arrayAdapter);
+            RSSListAdapter rssListAdapter = new RSSListAdapter(MainActivity.this,
+                    R.layout.list_complex_item, parseRSS.getAplicacoes());
+            rssListView.setAdapter(rssListAdapter);
         }
 
         private String downloadRSS(String urlString) {
